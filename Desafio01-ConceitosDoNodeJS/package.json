@@ -1,0 +1,15 @@
+{
+  "name": "Desafio01-ConceitosDoNodeJS",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
