@@ -10,6 +10,8 @@ const routes = new Router();
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
+/* very important where this is stated because
+   execution is procedural, token settings are only valid under it.  */
 routes.use(authMiddlewate);
 
 routes.post('/users', UserController.update);
