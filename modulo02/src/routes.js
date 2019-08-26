@@ -5,6 +5,7 @@ import multerConfig from './config/multer';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
+import ProviderController from './app/controllers/ProviderController';
 
 import authMiddlewate from './app/middlewares/auth';
 
@@ -19,6 +20,7 @@ routes.post('/sessions', SessionController.store);
 routes.use(authMiddlewate);
 
 routes.post('/users', UserController.update);
+routes.get('/providers', ProviderController.index);
 routes.post('/files', upload.single('file'), FileController.store);
 // file is the name of the field that will be sent in the request
 
