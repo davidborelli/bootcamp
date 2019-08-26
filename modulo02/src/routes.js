@@ -8,6 +8,7 @@ import FileController from './app/controllers/FileController';
 import ProviderController from './app/controllers/ProviderController';
 
 import authMiddlewate from './app/middlewares/auth';
+import AppointmentController from './app/controllers/AppointmentController';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -20,7 +21,11 @@ routes.post('/sessions', SessionController.store);
 routes.use(authMiddlewate);
 
 routes.post('/users', UserController.update);
+
 routes.get('/providers', ProviderController.index);
+
+routes.post('/appointments', AppointmentController.store);
+
 routes.post('/files', upload.single('file'), FileController.store);
 // file is the name of the field that will be sent in the request
 
