@@ -6,6 +6,7 @@ import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import ProviderController from './app/controllers/ProviderController';
+import ScheduleController from './app/controllers/ScheduleController';
 
 import authMiddlewate from './app/middlewares/auth';
 import AppointmentController from './app/controllers/AppointmentController';
@@ -26,6 +27,8 @@ routes.get('/providers', ProviderController.index);
 
 routes.get('/appointments', AppointmentController.index);
 routes.post('/appointments', AppointmentController.store);
+
+routes.get('/schedule', ScheduleController.index);
 
 routes.post('/files', upload.single('file'), FileController.store);
 // file is the name of the field that will be sent in the request
