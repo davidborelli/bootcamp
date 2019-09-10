@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false,
       },
       date: {
-        type: Sequelize.TIME,
+        type: Sequelize.DATE,
         allowNull: false,
       },
       banner: {
