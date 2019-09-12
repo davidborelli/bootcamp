@@ -5,9 +5,29 @@ import Meetup from '../models/Meetup';
 import MeetupsSchedulings from '../models/MeetupsSchedulings';
 import User from '../models/User';
 
+import Queue from '../../lib/Queue';
+import SubscriptionMail from '../jobs/SubscriptionMail';
+
 class MeetupsSchedulingController {
   async index(req, res) {
-    return res.json({ message: 'ok' });
+    const meetupsSchedulingsList = await MeetupsSchedulings.findAll({
+      where: {
+        user_id: req.userId,
+      },
+      include: [
+        {
+          model: Meetup,
+          where: {
+            date: {
+              [Op.gt]: new Date(),
+            },
+          },
+        },
+      ],
+      order: [[Meetup, 'date']],
+    });
+
+    return res.json(meetupsSchedulingsList);
   }
 
   async store(req, res) {
@@ -37,8 +57,6 @@ class MeetupsSchedulingController {
       include: [
         {
           model: Meetup,
-          as: 'meetup',
-          attributes: ['title', 'description', 'location', 'date'],
           where: {
             date: {
               [Op.gt]: new Date(),
@@ -54,7 +72,7 @@ class MeetupsSchedulingController {
     if (listSubscribedMeetup.length > 0) {
       listSubscribedMeetup.forEach(meetupLocated => {
         if (
-          differenceInHours(meetupLocated.meetup.date, meetup.date) === 0 &&
+          differenceInHours(meetupLocated.Meetup.date, meetup.date) === 0 &&
           meetupLocated.meetup_id !== meetup.id
         ) {
           const dateFormated = format(
@@ -82,12 +100,32 @@ class MeetupsSchedulingController {
       user_id: req.userId,
     };
 
-    const { meetup_id, user_id } = await MeetupsSchedulings.create(scheduling);
+    const { id } = await MeetupsSchedulings.create(scheduling);
 
-    return res.json({
-      meetup_id,
-      user_id,
+    const subscription = await MeetupsSchedulings.findByPk(id, {
+      include: [
+        {
+          model: Meetup,
+          attributes: ['title'],
+          include: [
+            {
+              model: User,
+              attributes: ['name', 'email'],
+            },
+          ],
+        },
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
     });
+
+    await Queue.add(SubscriptionMail.key, {
+      subscription,
+    });
+
+    return res.json(subscription);
   }
 }
 
