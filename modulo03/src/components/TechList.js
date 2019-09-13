@@ -12,8 +12,31 @@ class TechList extends Component {
 
   state = {
     newTech: "",
-    techs: ["Node.js", "ReactJS", "React Native"]
+    techs: []
   };
+
+  // As soon as the component appears on screen
+  componentDidMount() {
+    const techs = localStorage["techs"];
+
+    this.setState({
+      techs: techs ? JSON.parse(techs) : []
+    });
+  }
+
+  // Runs whenever props or state changes
+  componentDidUpdate(_, prevState) {
+    // prevProps, prevState old Properties
+    // this.porps,
+    // this.state
+
+    if (prevState.techs !== this.state.techs) {
+      localStorage["techs"] = JSON.stringify(this.state.techs);
+    }
+  }
+
+  //Executed when component no longer exists
+  componentWillUnmount() {}
 
   handleInputChange = e => {
     this.setState({
