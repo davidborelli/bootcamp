@@ -1,4 +1,4 @@
-# Configurando projeto par ter uma StyleGuide para código
+# Configurando projeto para ter uma StyleGuide no código
 
 ### Configurando o .editorconfig
   Para executar essa configuração precisa ter a extensão do **_editorconfig_** instalada no VSCODE.
