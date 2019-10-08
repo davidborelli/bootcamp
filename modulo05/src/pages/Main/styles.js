@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
-  flex: 1; /** Para que ocupe toda a tela, sempre colocar no container principal */
+  flex: 1;
   padding: 30px;
 `;
 
@@ -31,10 +31,11 @@ export const SubmitButton = styled(RectButton)`
   border-radius: 4px;
   margin-left: 10px;
   padding: 0 12px;
+  opacity: ${props => (props.loading ? 0.7 : 1)};
 `;
 
 export const List = styled.FlatList.attrs({
-  showsVerticalScrollIndicator: false /* Não mostrar a barra de rolaegem */,
+  showsVerticalScrollIndicator: false, // Desabilitando a barra de rolagem
 })`
   margin-top: 20px;
 `;
@@ -71,7 +72,7 @@ export const Bio = styled.Text.attrs({
 
 export const ProfileButton = styled(RectButton)`
   margin-top: 10px;
-  align-self: stretch; /* Alinha para utilizar a largura total da area inserida */
+  align-self: stretch; /* Ocupar a largura total do componte que ele está */
   border-radius: 4px;
   background: #7159c1;
   justify-content: center;

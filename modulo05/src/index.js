@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import React from 'react';
 import { StatusBar } from 'react-native';
 
@@ -11,7 +10,7 @@ console.disableYellowBox = true;
 export default function App() {
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#7159c1" />
+      <StatusBar barStyle="light-content" backgroundColor="#7159c2" />
       <Routes />
     </>
   );
