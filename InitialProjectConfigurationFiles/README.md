@@ -1,6 +1,6 @@
-#Configurando projeto par ter uma StyleGuide para código
+# Configurando projeto par ter uma StyleGuide para código
 
-###Configurando o .editorconfig
+### Configurando o .editorconfig
   Para executar essa configuração precisa ter a extensão do **_editorconfig_** instalada no VSCODE.
   Com a exigência acima atendida, para gera o arquivo de configuração basta clicar em um lugar “em branco”,
   no painel lateral com o botão direito do mouse, e selecionar a opção **“Generate .editorconfig"**
@@ -17,14 +17,14 @@ end_of_line = lf    // Para forçar que os finais das linhas sejam no padrão Un
 ```
 
 
-###Configurando o ESLint
+### Configurando o ESLint
 Adicionar o ESLint como dependência de desenvolvimento:
 ```yarn add eslint -D```
 
 Para incur a configuração através de um ja existente (Airbnb)
 ```yarn eslint —-init```
 
-#####Selecione as seguintes opções:
+##### Selecione as seguintes opções:
 1. To check syntax, find problems, and enforce code style;
 2. JavaScript modules (import/export);
 3. React;
@@ -38,7 +38,7 @@ yarn
 Na raiz do projeto para atualizar as dependências
 
 
-###Configurando o Prettier
+### Configurando o Prettier
 Executar o comando:
 ```yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D```
 
