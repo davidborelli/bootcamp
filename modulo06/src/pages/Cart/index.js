@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   MdRemoveCircleOutline,
   MdAddCircleOutline,
@@ -7,7 +8,7 @@ import {
 
 import * as S from './styles';
 
-export default function Cart() {
+function Cart({ cart }) {
   return (
     <S.Container>
       <S.ProductTable>
@@ -21,37 +22,36 @@ export default function Cart() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <img
-                src="https://static.netshoes.com.br/produtos/tenis-nike-shox-nz-se-/72/D12-2761-172/D12-2761-172_zoom1.jpg"
-                alt="Tênis"
-              />
-            </td>
-            <td>
-              <strong>Tênis bacanudo</strong>
-              <span>R$127,77</span>
-            </td>
-            <td>
-              <div>
+          {cart.map((cartItem, idx) => (
+            <tr key={idx}>
+              <td>
+                <img src={cartItem.image} alt={cartItem.title} />
+              </td>
+              <td>
+                <strong>{cartItem.title}</strong>
+                <span>{cartItem.priceFormated}</span>
+              </td>
+              <td>
+                <div>
+                  <button type="button">
+                    <MdRemoveCircleOutline size={20} color="#7159c1" />
+                  </button>
+                  <input type="number" readOnly value={cartItem.amount} />
+                  <button type="button">
+                    <MdAddCircleOutline size={20} color="#7159c1" />
+                  </button>
+                </div>
+              </td>
+              <td>
+                <strong>R$255,54</strong>
+              </td>
+              <td>
                 <button type="button">
-                  <MdRemoveCircleOutline size={20} color="#7159c1" />
+                  <MdDelete size={20} color="#7159c1" />
                 </button>
-                <input type="number" readOnly value={2} />
-                <button type="button">
-                  <MdAddCircleOutline size={20} color="#7159c1" />
-                </button>
-              </div>
-            </td>
-            <td>
-              <strong>R$255,54</strong>
-            </td>
-            <td>
-              <button type="button">
-                <MdDelete size={20} color="#7159c1" />
-              </button>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </S.ProductTable>
 
@@ -65,3 +65,9 @@ export default function Cart() {
     </S.Container>
   );
 }
+
+const mapStateToProps = state => ({
+  cart: state.cart,
+});
+
+export default connect(mapStateToProps)(Cart);
