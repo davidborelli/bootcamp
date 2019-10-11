@@ -26,6 +26,7 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
+    'no-param-reassign': 'off',
     'jsx-a11y/control-has-associated-label': 'off',
     'no-console': ['error', { allow: ['tron'] }],
   },
