@@ -1,101 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { MdAddShoppingCart } from 'react-icons/md';
+import api from '../../services/api';
+import { formatPrice } from '../../util/format';
 
 import * as S from './styles';
 
-export default function Home() {
-  return (
-    <S.ProductList>
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-nike-shox-nz-se-/72/D12-2761-172/D12-2761-172_zoom1.jpg"
-          alt="Tênis"
-        />
-        <strong>Tênis bacanudo</strong>
-        <span>R$129,90</span>
+export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+    };
+  }
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-nike-shox-nz-se-/72/D12-2761-172/D12-2761-172_zoom1.jpg"
-          alt="Tênis"
-        />
-        <strong>Tênis bacanudo</strong>
-        <span>R$129,90</span>
+  async componentDidMount() {
+    const response = await api.get('/products');
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-nike-shox-nz-se-/72/D12-2761-172/D12-2761-172_zoom1.jpg"
-          alt="Tênis"
-        />
-        <strong>Tênis bacanudo</strong>
-        <span>R$129,90</span>
+    const data = response.data.map(product => ({
+      ...product,
+      priceFormatted: formatPrice(product.price),
+    }));
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-nike-shox-nz-se-/72/D12-2761-172/D12-2761-172_zoom1.jpg"
-          alt="Tênis"
-        />
-        <strong>Tênis bacanudo</strong>
-        <span>R$129,90</span>
+    this.setState({ products: data });
+  }
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-nike-shox-nz-se-/72/D12-2761-172/D12-2761-172_zoom1.jpg"
-          alt="Tênis"
-        />
-        <strong>Tênis bacanudo</strong>
-        <span>R$129,90</span>
+  render() {
+    const { products } = this.state;
+    return (
+      <S.ProductList>
+        {products.map(product => (
+          <li key={product.id}>
+            <img src={product.image} alt={product.title} />
+            <strong>{product.title}</strong>
+            <span>{product.priceFormatted}</span>
 
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://static.netshoes.com.br/produtos/tenis-nike-shox-nz-se-/72/D12-2761-172/D12-2761-172_zoom1.jpg"
-          alt="Tênis"
-        />
-        <strong>Tênis bacanudo</strong>
-        <span>R$129,90</span>
-
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#fff" /> 3
-          </div>
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-    </S.ProductList>
-  );
+            <button type="button">
+              <div>
+                <MdAddShoppingCart size={16} color="#fff" /> 3
+              </div>
+              <span>ADICIONAR AO CARRINHO</span>
+            </button>
+          </li>
+        ))}
+      </S.ProductList>
+    );
+  }
 }
