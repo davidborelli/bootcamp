@@ -8,7 +8,7 @@ import {
 
 import * as S from './styles';
 
-function Cart({ cart }) {
+function Cart({ cart, dispatch }) {
   return (
     <S.Container>
       <S.ProductTable>
@@ -22,8 +22,8 @@ function Cart({ cart }) {
           </tr>
         </thead>
         <tbody>
-          {cart.map((cartItem, idx) => (
-            <tr key={idx}>
+          {cart.map(cartItem => (
+            <tr key={cartItem.id}>
               <td>
                 <img src={cartItem.image} alt={cartItem.title} />
               </td>
@@ -46,7 +46,12 @@ function Cart({ cart }) {
                 <strong>R$255,54</strong>
               </td>
               <td>
-                <button type="button">
+                <button
+                  type="button"
+                  onClick={() =>
+                    dispatch({ type: 'REMOVE_FROM_CART', id: cartItem.id })
+                  }
+                >
                   <MdDelete size={20} color="#7159c1" />
                 </button>
               </td>
