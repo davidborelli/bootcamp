@@ -8,8 +8,12 @@ import rootSaga from './modules/rootSaga';
 applyMiddleware => Aplicar o middleware no nas configurações
 compose => Juntar duas configurações
 */
+const sagaMonitor =
+  process.env.NODE_ENV === 'development'
+    ? console.tron.createSagaMonitor()
+    : null;
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
 
 const enhancer =
   process.env.NODE_ENV === 'development'
