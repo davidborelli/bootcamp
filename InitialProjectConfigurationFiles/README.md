@@ -69,3 +69,22 @@ Na raiz do projeto criar um arquivo **.prettierrc** e adicionar o seguinte conte
   "trailingComma": "es5"
 }
 ```
+
+
+### Caso for utilizar React Hooks
+Plugin: ``` yarn add eslint-pluginreact-hooks -D ``` 
+
+Após instalado o plugin no arquivo .eslintrc, adicionar o seguinte:
+```
+plugins: [
+  ...,
+  'react-hooks'
+] 
+
+rules: {
+  ...,
+  'react-hooks/rules-of-hooks': 'error',
+  'react-hooks/exhaustive-deps': 'warn'
+}
+```
+
