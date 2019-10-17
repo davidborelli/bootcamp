@@ -72,7 +72,7 @@ Na raiz do projeto criar um arquivo **.prettierrc** e adicionar o seguinte conte
 
 
 ### Caso for utilizar React Hooks
-Plugin: ``` yarn add eslint-pluginreact-hooks -D ``` 
+Plugin: ``` yarn add eslint-plugin-react-hooks -D ``` 
 
 Após instalado o plugin no arquivo .eslintrc, adicionar o seguinte:
 ```
