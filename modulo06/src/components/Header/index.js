@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { MdShoppingBasket } from 'react-icons/md';
 import logo from '../../assets/images/logo.svg';
 
 import * as S from './styles';
 
-function Header({ cartSize }) {
+export default function Header() {
+  // Utilizando hooks para pegar o valor do Reducer
+  const cartSize = useSelector(state => state.cart.length);
+
   return (
     <S.Container>
       <Link to="/">
@@ -24,10 +27,3 @@ function Header({ cartSize }) {
     </S.Container>
   );
 }
-
-/* Acessando as informações que estão nos reducers
-   Sempre que houver mudança, vai renderizar novamente
-*/
-export default connect(state => ({
-  cartSize: state.cart.length,
-}))(Header);
