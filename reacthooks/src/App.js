@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 function App() {
   const [techs, setTech] = useState([]);
@@ -30,6 +30,13 @@ function App() {
     localStorage.setItem('techs', JSON.stringify(techs));
   }, [techs]);
 
+  /* Memo é utilizando para sempre que precisar calcular alguma coisa dentro do HTML, caso
+    não utilize o mesmo, sempre que uma variável que estiver sendo gerenciada mudar, o HTML
+    vai atulizar tudo, isso não é bom, o useMemo() resolve esse problema indicando para ele
+    o que fazer e quando qual variável for diferente do estado anterior
+  */
+  const techSize = useMemo(() => techs.length, [techs]);
+
   return (
     <>
       <ul>
@@ -37,6 +44,7 @@ function App() {
           <li key={tech}>{tech}</li>
         ))}
       </ul>
+      <strong>Você tem {techSize} tecnologias</strong> <br />
       <input
         type="text"
         value={newTech}
