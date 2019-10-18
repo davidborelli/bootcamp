@@ -1,13 +1,17 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 function App() {
   const [techs, setTech] = useState([]);
   const [newTech, setNewTech] = useState('');
 
-  const handleAdd = () => {
+  /* Cada vez que uma variável gerenciada é alterada o JavaScript remonta tudo, inclusive as funções
+    isso pode afetar o desempenho do JS em caso de funções mais complexas, para resolver esse problema
+    veio o useCallback, que só vai remontar a função novamente quando as variáveis indicadas a ele mudar.
+  */
+  const handleAdd = useCallback(() => {
     setTech([...techs, newTech]);
     setNewTech('');
-  };
+  }, [newTech, techs]);
 
   // simulando didMount | Caracteristica é que não gerencia ninguém, ou seja executa somente quando montar
   useEffect(() => {
