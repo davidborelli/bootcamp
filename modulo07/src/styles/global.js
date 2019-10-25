@@ -11,7 +11,7 @@ export default createGlobalStyle`
   }
 
   *:focus {
-    outline: 0;
+    outline: 0; /* Remover aquele azul que fica em volta do botão/input */
   }
 
   html, body, #root {
