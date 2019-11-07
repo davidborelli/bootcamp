@@ -1,18 +1,34 @@
-import React from 'react';
-
+import React, { useState, useMemo } from 'react';
+import { format, subDays, addDays } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 
 import * as S from './styles';
 
 export default function DashBoard() {
+  const [date, setDate] = useState(new Date());
+
+  const dateFormatted = useMemo(
+    () => format(date, "d 'de' MMMM", { locale: pt }),
+    [date]
+  );
+
+  const handlePrevDay = () => {
+    setDate(subDays(date, 1));
+  };
+
+  const handleNextDay = () => {
+    setDate(addDays(date, 1));
+  };
+
   return (
     <S.Container>
       <header>
-        <button type="button">
+        <button type="button" onClick={handlePrevDay}>
           <MdNavigateBefore size={36} color="#FFF" />
         </button>
-        <strong>30 de maio</strong>
-        <button type="button">
+        <strong>{dateFormatted}</strong>
+        <button type="button" onClick={handlePrevDay}>
           <MdNavigateNext size={36} color="#FFF" />
         </button>
       </header>
