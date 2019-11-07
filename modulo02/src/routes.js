@@ -23,7 +23,7 @@ routes.post('/sessions', SessionController.store);
    execution is procedural, token settings are only valid under it.  */
 routes.use(authMiddlewate);
 
-routes.post('/users', UserController.update);
+routes.put('/users', UserController.update);
 
 routes.get('/providers', ProviderController.index);
 routes.get('/providers/:providerId/available', AvailableController.index);
