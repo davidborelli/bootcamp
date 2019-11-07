@@ -28,7 +28,7 @@ export default function DashBoard() {
           <MdNavigateBefore size={36} color="#FFF" />
         </button>
         <strong>{dateFormatted}</strong>
-        <button type="button" onClick={handlePrevDay}>
+        <button type="button" onClick={handleNextDay}>
           <MdNavigateNext size={36} color="#FFF" />
         </button>
       </header>
