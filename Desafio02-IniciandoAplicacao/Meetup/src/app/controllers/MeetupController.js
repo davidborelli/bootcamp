@@ -9,6 +9,7 @@ import {
 import { Op } from 'sequelize';
 import Meetup from '../models/Meetup';
 import User from '../models/User';
+import File from '../models/File';
 
 class MeetupController {
   async index(req, res) {
@@ -40,6 +41,10 @@ class MeetupController {
           model: User,
           attributes: ['name', 'email'],
         },
+        {
+          model: File,
+          as: 'avatar',
+        },
       ],
     });
 
@@ -58,7 +63,6 @@ class MeetupController {
         .required()
         .min(5),
       date: Yup.date().required(),
-      banner: Yup.string().required(),
       user_id: Yup.number().required(),
     });
 
@@ -66,7 +70,8 @@ class MeetupController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { title, description, location, date, banner, user_id } = req.body;
+    const { title, description, location, date, avatar_id, user_id } = req.body;
+
     const hourStart = startOfHour(parseISO(date));
 
     if (isBefore(hourStart, new Date())) {
@@ -78,7 +83,7 @@ class MeetupController {
       description,
       location,
       date,
-      banner,
+      avatar_id,
       user_id,
     });
 
@@ -97,7 +102,6 @@ class MeetupController {
         .required()
         .min(5),
       date: Yup.date().required(),
-      banner: Yup.string().required(),
       user_id: Yup.number().required(),
     });
 

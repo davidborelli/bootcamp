@@ -71,5 +71,9 @@ export const Scheduling = styled.li`
       margin-right: 10px;
       opacity: 0.4;
     }
+
+    svg {
+      cursor: pointer;
+    }
   }
 `;

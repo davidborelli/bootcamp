@@ -23,9 +23,12 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      banner: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      avatar_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'files', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: true,
       },
       user_id: {
         type: Sequelize.INTEGER,

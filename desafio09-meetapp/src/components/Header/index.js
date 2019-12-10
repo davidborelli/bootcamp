@@ -21,7 +21,9 @@ export default function Header() {
       <>
         <S.Content>
           <nav>
-            <img src={logo} alt="Logo MeetApp" />
+            <Link to="/">
+              <img src={logo} alt="Logo MeetApp" />
+            </Link>
           </nav>
 
           <aside>

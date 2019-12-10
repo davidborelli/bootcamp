@@ -9,8 +9,6 @@ class Meetup extends Model {
         description: Sequelize.STRING,
         location: Sequelize.STRING,
         date: Sequelize.DATE,
-        banner: Sequelize.STRING,
-        user_id: Sequelize.NUMBER,
         pass: {
           type: Sequelize.VIRTUAL,
           get() {
@@ -28,6 +26,7 @@ class Meetup extends Model {
   static associate(models) {
     this.hasMany(models.MeetupsSchedulings, { foreignKey: 'meetup_id' });
     this.belongsTo(models.User, { foreignKey: 'user_id' });
+    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
   }
 }
 

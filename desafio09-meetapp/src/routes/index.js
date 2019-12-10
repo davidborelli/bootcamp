@@ -4,6 +4,7 @@ import Route from './Routes';
 
 import Dashboard from '../pages/Dashboard';
 import Profile from '../pages/Profile';
+import Meetup from '../pages/Meetup';
 
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
@@ -14,6 +15,7 @@ export default function Routes() {
       <Route path="/" exact component={SignIn} />
       <Route path="/register" component={SignUp} />
 
+      <Route path="/meetup" component={Meetup} isPrivate />
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
     </Switch>
