@@ -9,7 +9,7 @@ class ProviderController {
       include: {
         model: File,
         as: 'avatar',
-        attributes: ['name', 'path'],
+        attributes: ['name', 'path', 'url'],
       },
     });
     return res.json(providers);
